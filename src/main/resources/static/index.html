@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stocks Broker</title>
+</head>
+<body>
+<h2>Stock Broker Generator</h2>
+
+<button value="Connect" onclick="go();">Connect</button>
+<button value="Disconnect" onclick="stop();">Disconnect</button>
+<div id="" style="display: flex;">
+    <div id="outputStocks" style="display: flex; flex-direction: column; margin-right: 2rem; border: solid 1px #F9F8F7">
+        <h4>Stocks</h4>
+    </div>
+    <div id="outputStockEvents" style="display: flex; flex-direction: column; border: solid 1px #F9F8F7">
+        <h4>Events</h4>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    var outputQuotesStocks;
+    var outputStockEvent;
+    let stocksWs
+    let stockEventWs
+
+    function go() {
+        outputQuotesStocks = document.getElementById("outputStocks");
+        outputStockEvent = document.getElementById("outputStockEvent");
+        stocksWs = testWebSocket("ws://localhost:8080/rx-stock", outputQuotesStocks);
+        stockEventWs = testWebSocket("ws://localhost:8080/stock-event", outputStockEvent);
+    }
+
+    function stop() {
+        stocksWs.close()
+        stockEventWs.close()
+    }
+
+    function testWebSocket(param, output) {
+        const websocket = new WebSocket(param);
+        websocket.onopen = function (evt) {
+            onOpen(evt, output)
+        };
+        websocket.onclose = function (evt) {
+            onClose(evt, output)
+        };
+        websocket.onmessage = function (evt) {
+            onMessage(evt, output)
+        };
+        websocket.onerror = function (evt) {
+            onError(evt, output)
+        };
+        return websocket
+    }
+
+    function onOpen(evt, output) {
+        writeToScreen("CONNECTED", output);
+    }
+
+    function onClose(evt, output) {
+        writeToScreen("DISCONNECTED", output);
+    }
+
+    function onMessage(evt, output) {
+        writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>', output);
+    }
+
+    function onError(evt, output) {
+        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data, output);
+    }
+
+
+    function writeToScreen(message, output) {
+        var pre = document.createElement("p");
+        pre.style.wordWrap = "break-word";
+        pre.innerHTML = message;
+        output.insertBefore(pre, output.children[1]);
+        if (output.children.length > 500) {
+            output.removeChild(output.children[output.children.length - 1])
+        }
+    }
+
+
+</script>
+</body>
+</html>
