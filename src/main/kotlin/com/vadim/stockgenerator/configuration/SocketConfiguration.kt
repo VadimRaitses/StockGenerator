@@ -1,9 +1,9 @@
-package com.example.springsocket.configuration
+package com.vadim.stockgenerator.configuration
 
-import com.example.springsocket.model.Stock
-import com.example.springsocket.service.impl.StockServiceImpl
-import com.example.springsocket.socket.StockHandler
-import com.example.springsocket.socket.StockRxHandler
+import com.vadim.stockgenerator.model.Stock
+import com.vadim.stockgenerator.service.impl.StockServiceImpl
+import com.vadim.stockgenerator.socket.StockHandler
+import com.vadim.stockgenerator.socket.StockRxHandler
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.context.annotation.Bean

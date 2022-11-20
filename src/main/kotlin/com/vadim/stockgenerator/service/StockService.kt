@@ -1,6 +1,6 @@
-package com.example.springsocket.service
+package com.vadim.stockgenerator.service
 
-import com.example.springsocket.model.Stock
+import com.vadim.stockgenerator.model.Stock
 
 interface StockService {
 

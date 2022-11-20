@@ -1,7 +1,7 @@
-package com.example.springsocket.service
+package com.vadim.stockgenerator.service
 
-import com.example.springsocket.model.Message
-import com.example.springsocket.model.Stock
+import com.vadim.stockgenerator.model.Message
+import com.vadim.stockgenerator.model.Stock
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketSession

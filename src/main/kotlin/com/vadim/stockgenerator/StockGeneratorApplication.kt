@@ -1,11 +1,11 @@
-package com.example.springsocket
+package com.vadim.stockgenerator
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SpringSocketApplication
+class StockGeneratorApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringSocketApplication>(*args)
+    runApplication<StockGeneratorApplication>(*args)
 }

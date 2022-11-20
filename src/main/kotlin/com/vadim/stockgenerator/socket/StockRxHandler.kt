@@ -1,9 +1,9 @@
-package com.example.springsocket.socket
+package com.vadim.stockgenerator.socket
 
-import com.example.springsocket.model.Message
-import com.example.springsocket.model.Stock
-import com.example.springsocket.model.StockPrice
-import com.example.springsocket.service.StockService
+import com.vadim.stockgenerator.model.Message
+import com.vadim.stockgenerator.model.Stock
+import com.vadim.stockgenerator.model.StockPrice
+import com.vadim.stockgenerator.service.StockService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.observables.ConnectableObservable
@@ -45,7 +45,7 @@ class StockRxHandler(private val stockService: StockService, private val json: L
             val stock = json[json.size.mod(item.index)]
             println("$item : $stock")
             //broadcast(Message("java-rx", stock,item.price))
-            emit(session,Message("java-rx", stock,item.price))
+            emit(session, Message("java-rx", stock,item.price))
         }
         sessionMapList[session] = disposable
         println("$session,$sessionMapList")

@@ -1,4 +1,4 @@
-package com.example.springsocket.rest
+package com.vadim.stockgenerator.rest
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping

@@ -1,4 +1,4 @@
-package com.example.springsocket.model
+package com.vadim.stockgenerator.model
 
 import lombok.AllArgsConstructor
 import lombok.Data

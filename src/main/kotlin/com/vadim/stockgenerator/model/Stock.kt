@@ -1,4 +1,4 @@
-package com.example.springsocket.model
+package com.vadim.stockgenerator.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import lombok.AllArgsConstructor

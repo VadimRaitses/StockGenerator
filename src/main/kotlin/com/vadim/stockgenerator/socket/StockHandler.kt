@@ -1,9 +1,9 @@
-package com.example.springsocket.socket
+package com.vadim.stockgenerator.socket
 
-import com.example.springsocket.model.Message
-import com.example.springsocket.model.Stock
-import com.example.springsocket.service.StockRunnableService
-import com.example.springsocket.service.StockService
+import com.vadim.stockgenerator.model.Message
+import com.vadim.stockgenerator.model.Stock
+import com.vadim.stockgenerator.service.StockRunnableService
+import com.vadim.stockgenerator.service.StockService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import lombok.AllArgsConstructor
 import org.springframework.web.socket.CloseStatus
@@ -13,7 +13,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler
 
 
 @AllArgsConstructor
-class StockHandler(private val stockService: StockService,private val json: List<Stock>) : TextWebSocketHandler() {
+class StockHandler(private val stockService: StockService, private val json: List<Stock>) : TextWebSocketHandler() {
 
     private val sessionList = ArrayList<WebSocketSession>(0)
     private lateinit var threadWithRunnable: Thread

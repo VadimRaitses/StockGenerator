@@ -1,7 +1,7 @@
-package com.example.springsocket.service.impl
+package com.vadim.stockgenerator.service.impl
 
-import com.example.springsocket.model.Stock
-import com.example.springsocket.service.StockService
+import com.vadim.stockgenerator.model.Stock
+import com.vadim.stockgenerator.service.StockService
 import org.springframework.stereotype.Service
 
 

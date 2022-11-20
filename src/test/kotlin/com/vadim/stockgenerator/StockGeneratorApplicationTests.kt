@@ -1,10 +1,10 @@
-package com.example.springsocket
+package com.vadim.stockgenerator
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class SpringSocketApplicationTests {
+class StockGeneratorApplicationTests {
 
     @Test
     fun contextLoads() {
