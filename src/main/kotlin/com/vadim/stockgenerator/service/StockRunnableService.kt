@@ -1,14 +1,13 @@
 package com.vadim.stockgenerator.service
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.vadim.stockgenerator.model.Message
 import com.vadim.stockgenerator.model.Stock
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketSession
 import kotlin.random.Random
 
 class StockRunnableService(private val sessions: ArrayList<WebSocketSession>, private val json: List<Stock>) : Runnable {
-
 
     private fun emit(session: WebSocketSession, msg: Message) {
         if (session.isOpen)

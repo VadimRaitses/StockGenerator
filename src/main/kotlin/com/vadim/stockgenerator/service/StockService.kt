@@ -4,10 +4,9 @@ import com.vadim.stockgenerator.model.Stock
 
 interface StockService {
 
-    fun getStock()
+    fun getStock(isin:String)
     fun getStocks()
     fun addStock(stock: Stock)
-    fun deleteStock()
-    fun updateStockState()
-
+    fun deleteStock(isin:String)
+    fun updateStockState(isin:String,stock: Stock)
 }

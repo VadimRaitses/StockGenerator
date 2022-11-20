@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor
 @NoArgsConstructor
 @Data
 class Stock(
-    @JsonProperty("ACT Symbol") val id: String,
+    @JsonProperty("ACT Symbol") val isin: String,
     @JsonProperty("Company Name") val companyName: String,
 ) {
-
-    override fun toString(): String = "Stock(id='$id', companyName='$companyName')"
+    override fun toString(): String = "Stock(isin='$isin', companyName='$companyName')"
 }
 
 

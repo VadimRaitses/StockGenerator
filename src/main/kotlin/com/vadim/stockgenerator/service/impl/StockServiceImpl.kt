@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service
 class StockServiceImpl : StockService {
 
     val stockBank = HashMap<String, Stock>()
-
-
-
-    override fun getStock() {
+    override fun getStock(isin: String) {
         TODO("Not yet implemented")
     }
 
@@ -24,11 +21,13 @@ class StockServiceImpl : StockService {
         TODO("Not yet implemented")
     }
 
-    override fun deleteStock() {
+    override fun deleteStock(isin: String) {
         TODO("Not yet implemented")
     }
 
-    override fun updateStockState() {
+    override fun updateStockState(isin: String, stock: Stock) {
         TODO("Not yet implemented")
     }
+
+
 }

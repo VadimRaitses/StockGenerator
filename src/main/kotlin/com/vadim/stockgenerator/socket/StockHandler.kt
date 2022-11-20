@@ -1,10 +1,10 @@
 package com.vadim.stockgenerator.socket
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.vadim.stockgenerator.model.Message
 import com.vadim.stockgenerator.model.Stock
 import com.vadim.stockgenerator.service.StockRunnableService
 import com.vadim.stockgenerator.service.StockService
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import lombok.AllArgsConstructor
 import org.springframework.web.socket.CloseStatus
 import org.springframework.web.socket.TextMessage
@@ -23,7 +23,7 @@ class StockHandler(private val stockService: StockService, private val json: Lis
     override fun afterConnectionEstablished(session: WebSocketSession) {
         println("$session,$sessionList")
         if (sessionList.size == 0) {
-            threadWithRunnable = Thread(StockRunnableService(sessionList,json))
+            threadWithRunnable = Thread(StockRunnableService(sessionList, json))
             threadWithRunnable.start();
         }
         sessionList += session

@@ -1,10 +1,10 @@
 package com.vadim.stockgenerator.socket
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.vadim.stockgenerator.model.Message
 import com.vadim.stockgenerator.model.Stock
 import com.vadim.stockgenerator.model.StockPrice
 import com.vadim.stockgenerator.service.StockService
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.observables.ConnectableObservable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -35,7 +35,7 @@ class StockRxHandler(private val stockService: StockService, private val json: L
             .doOnDispose { println("Disposed") }
             .publish()
 
-    private val sessionMapList = HashMap<WebSocketSession, Disposable>(0)
+    private val sessionMapList = HashMap<WebSocketSession, Disposable>()
 
 
     @Throws(Exception::class)
@@ -44,12 +44,10 @@ class StockRxHandler(private val stockService: StockService, private val json: L
         val disposable: Disposable = observableTrigger.subscribe { item: StockPrice ->
             val stock = json[json.size.mod(item.index)]
             println("$item : $stock")
-            //broadcast(Message("java-rx", stock,item.price))
-            emit(session, Message("java-rx", stock,item.price))
+            emit(session, Message("java-rx", stock, item.price))
         }
         sessionMapList[session] = disposable
         println("$session,$sessionMapList")
-
     }
 
     @Throws(Exception::class)
@@ -60,12 +58,8 @@ class StockRxHandler(private val stockService: StockService, private val json: L
         println("afterConnectionClosed ,$sessionMapList")
     }
 
-    override fun handleTextMessage(session: WebSocketSession, message: TextMessage) {
-    }
-
-    private fun emit(session: WebSocketSession, msg: Message) {
+    private fun emit(session: WebSocketSession, msg: Message) =
         session.sendMessage(TextMessage(jacksonObjectMapper().writeValueAsString(msg)))
-    }
 
     private fun broadcast(msg: Message) = sessionMapList.forEach { emit(it.key, msg) }
 

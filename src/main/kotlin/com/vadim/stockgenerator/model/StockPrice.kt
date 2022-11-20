@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor
 class StockPrice(
     val index: Int,
     val price: Double,
-    ) {
-
+) {
     override fun toString(): String = "StockPrice(index:$index price:$price)"
-
 }
 
 

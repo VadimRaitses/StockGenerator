@@ -8,9 +8,8 @@ import org.springframework.web.servlet.ModelAndView
 @Controller
 class SocketResource {
 
-
     @RequestMapping("/")
-    fun blog(): ModelAndView {
+    fun index(): ModelAndView {
         val modelAndView = ModelAndView()
         modelAndView.viewName = "index.html"
         return modelAndView
