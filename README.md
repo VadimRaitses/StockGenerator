@@ -1,6 +1,7 @@
 ### Stock Generator
 
-JavaRx and Kotlin workaround over centralized publishing available stocks prices to subscribed client over websocket.
+JavaRx, MultiThread and Kotlin workaround over centralized\
+publishing available stocks prices to subscribed client over websocket.
 
 ```
     mvn spring-boot:run  
@@ -11,19 +12,11 @@ JavaRx and Kotlin workaround over centralized publishing available stocks prices
 client available on **http://localhost:8080**  
 socket with java rx publishing available on **http://localhost:8080/rx-stock**
 socket with thread publishing available on **http://localhost:8080/stock**
+socket with thread publishing available on **http://localhost:8080/stock-event**
 
-All connected clients will always get same published stock emitted by server current state managed via :
+infinitive stock generated server with client,\
+**ws:/stock will** generate stocks events with event ADD or DELETE\
+**ws:/stock-event** will generate prices to stocks already created\
+**http:/sessions** will show list of connected sessions and their states
 
-```
-                ConnectableObservable
-```
-
-stock data had taken from https://datahub.io/core/nyse-other-listings#data
-
-
-###next steps
-1. Implementation Stock and Prices service, thus replace json file with static data 
-and support more realistic imitation of stock market, by adding and deleting available stocks
-2. implement user service with subscription for stock list.
-3. adding broker communication.
 
