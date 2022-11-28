@@ -1,12 +1,15 @@
 package com.vadim.stockgenerator.service
 
 import com.vadim.stockgenerator.model.Stock
+import com.vadim.stockgenerator.model.StockPrice
+import java.util.concurrent.ConcurrentHashMap
 
 interface StockService {
 
-    fun getStock(isin:String)
-    fun getStocks()
-    fun addStock(stock: Stock)
+    fun getStock(isin:String) : Stock?
+    fun addStock()
+    fun getNextStockEvent(): Stock?
     fun deleteStock(isin:String)
     fun updateStockState(isin:String,stock: Stock)
+    fun getNextPrice(): StockPrice?
 }

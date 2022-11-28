@@ -1,0 +1,38 @@
+.main{
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+/*HEADER PART*/
+.header{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.header .header-title{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+}
+
+.header .header-button-container{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+}
+
+.header-button-container .stock-button{
+    margin-left: 15px;
+}
+
+
+/*BODY PART*/
+
+.body-container{
+    display: flex;
+}
+
+

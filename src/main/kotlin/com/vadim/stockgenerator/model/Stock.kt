@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor
 class Stock(
     @JsonProperty("ACT Symbol") val isin: String,
     @JsonProperty("Company Name") val companyName: String,
+    @JsonProperty("Stock State") var stockStatus: StockStatus? = StockStatus.ADD
 ) {
+
     override fun toString(): String = "Stock(isin='$isin', companyName='$companyName')"
 }
 

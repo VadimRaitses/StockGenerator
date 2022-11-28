@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor
 @NoArgsConstructor
 @Data
 class StockPrice(
-    val index: Int,
-    val price: Double,
+    val index: Int = 0,
+    private val isin: String = "",
+    private val price: Double,
 ) {
-    override fun toString(): String = "StockPrice(index:$index price:$price)"
+    override fun toString(): String = "StockPrice(isin:$isin index:$index price:$price)"
 }
 
 

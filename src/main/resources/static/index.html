@@ -6,23 +6,37 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Stocks Broker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stock.css">
+
 </head>
 <body>
-<h2>Stock Broker Generator</h2>
 
-<button value="Connect" onclick="go();">Connect</button>
-<button value="Disconnect" onclick="stop();">Disconnect</button>
-<div id="" style="display: flex;">
-    <div id="outputStocks" style="display: flex; flex-direction: column; margin-right: 2rem; border: solid 1px #F9F8F7">
-        <h4>Stocks</h4>
+<div class="main">
+    <div class="header">
+        <div class="header-title"><h2>Stock Broker Generator</h2></div>
+
+        <div class="header-button-container">
+            <button id="connect" value="Connect" onclick="go();" class="btn btn-secondary stock-button">Connect</button>
+            <button id="disconnect" value="Disconnect" onclick="stop();" class="btn btn-secondary stock-button">Disconnect</button>
+        </div>
+
     </div>
-    <div id="outputStockEvents" style="display: flex; flex-direction: column; border: solid 1px #F9F8F7">
-        <h4>Events</h4>
+    <div id="" class="body-container">
+        <div id="outputStocks" style="display: flex; flex-direction: column; margin-right: 2rem; border: solid 1px #F9F8F7">
+            <h4>Stocks</h4>
+        </div>
+        <div id="outputStockEvents" style="display: flex; flex-direction: column; border: solid 1px #F9F8F7">
+            <h4>Events</h4>
+        </div>
     </div>
 </div>
 
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 
     var outputQuotesStocks;
     var outputStockEvent;
@@ -31,8 +45,9 @@
 
     function go() {
         outputQuotesStocks = document.getElementById("outputStocks");
-        outputStockEvent = document.getElementById("outputStockEvent");
-        stocksWs = testWebSocket("ws://localhost:8080/rx-stock", outputQuotesStocks);
+        outputStockEvent = document.getElementById("outputStockEvents");
+        // stocksWs = testWebSocket("ws://localhost:8080/rx-stock", outputQuotesStocks);
+        stocksWs = testWebSocket("ws://localhost:8080/stock", outputQuotesStocks);
         stockEventWs = testWebSocket("ws://localhost:8080/stock-event", outputStockEvent);
     }
 
@@ -44,9 +59,11 @@
     function testWebSocket(param, output) {
         const websocket = new WebSocket(param);
         websocket.onopen = function (evt) {
+            document.getElementById("connect").disabled = true;
             onOpen(evt, output)
         };
         websocket.onclose = function (evt) {
+            document.getElementById('connect').disabled = false;
             onClose(evt, output)
         };
         websocket.onmessage = function (evt) {

@@ -1,34 +1,38 @@
 package com.vadim.stockgenerator.configuration
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
-import com.vadim.stockgenerator.model.Stock
-import com.vadim.stockgenerator.service.impl.StockServiceImpl
-import com.vadim.stockgenerator.socket.StockHandler
-import com.vadim.stockgenerator.socket.StockRxHandler
-import org.springframework.context.annotation.Bean
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.socket.config.annotation.EnableWebSocket
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
+import org.springframework.web.socket.handler.TextWebSocketHandler
+
 
 @Configuration
 @EnableWebSocket
 class SocketConfiguration : WebSocketConfigurer {
 
-    fun stocksData(): List<Stock> {
-        val fileContent: String = StockServiceImpl::class.java.getResource("/stocks.json")?.readText()
-            .orEmpty()
-        return ObjectMapper().readValue(fileContent)
-    }
+    @Autowired
+    @Qualifier("threadStockGeneratorHandler")
+    private lateinit var stockHandler: TextWebSocketHandler
 
-    @Bean
-    fun stockService(): StockServiceImpl {
-        return StockServiceImpl();
-    }
+    @Autowired
+    @Qualifier("rxStockGenerator")
+    private lateinit var rxStockGenerator: TextWebSocketHandler
+
+
+    @Autowired
+    @Qualifier("threadPriceGeneratorHandler")
+    private lateinit var priceStockGenerator: TextWebSocketHandler
+
 
     override fun registerWebSocketHandlers(registry: WebSocketHandlerRegistry) {
-        registry.addHandler(StockHandler(stockService(), stocksData()), "/stock")
-        registry.addHandler(StockRxHandler(stockService(), stocksData()), "/rx-stock")
+
+        registry.addHandler(stockHandler, "/stock")
+        registry.addHandler(priceStockGenerator, "/stock-event")
+
+        registry.addHandler(rxStockGenerator, "/rx-stock")
     }
+
 }
