@@ -2,7 +2,6 @@ package com.vadim.stockgenerator.service.impl
 
 import com.vadim.stockgenerator.model.Stock
 import com.vadim.stockgenerator.model.StockPrice
-import com.vadim.stockgenerator.model.StockSessionStatus
 import com.vadim.stockgenerator.model.StockStatus
 import com.vadim.stockgenerator.service.StockService
 import com.vadim.stockgenerator.utils.Lorem
@@ -28,17 +27,16 @@ class StockServiceImpl : StockService {
         return stockBank[isin]
     }
 
-    fun getStocks(): MutableCollection<Stock> {
+    override fun getStocks(): Collection<Stock> {
         return stockBank.values
     }
 
     @Synchronized
     override fun getNextStockEvent(): Stock? {
-        val nextAction = Random.nextBoolean()
-        return if (nextAction)
+        return if (Random.nextBoolean())
             getStocks().elementAt(Random.nextInt(stockBank.values.size))
         else {
-            deleteStock()
+           return if(Random.nextBoolean()) addStock() else deleteStock()
         }
     }
 
@@ -49,13 +47,14 @@ class StockServiceImpl : StockService {
         return stock
     }
 
-    override fun addStock() {
+    override fun addStock() : Stock? {
         val isin = randomStringByJavaRandom()
         stockBank[isin] = Stock(isin, Lorem.sentence(3), StockStatus.ADD)
+        return  stockBank[isin]
     }
 
     override fun deleteStock(isin: String) {
-        stockBank-=isin
+        stockBank -= isin
     }
 
     override fun updateStockState(isin: String, stock: Stock) {
@@ -64,8 +63,12 @@ class StockServiceImpl : StockService {
 
     @Synchronized
     override fun getNextPrice(): StockPrice? {
-        val stock: Stock = stockBank.values.elementAt(Random.nextInt(stockBank.values.size))
-        return StockPrice(0, stock.isin, Random.nextDouble(from = 0.1, until = 100.0))
+        val nextInt = Random.nextInt(stockBank.size)
+        if(nextInt>=0) {
+            val stock: Stock = stockBank.values.elementAt(nextInt)
+            return StockPrice(0, stock.isin, Random.nextDouble(from = 0.1, until = 100.0))
+        }
+        return  StockPrice(0, "", 0.0)
     }
 
 
