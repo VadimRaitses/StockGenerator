@@ -1,4 +1,4 @@
-.main{
+.main {
 
     display: flex;
     flex-direction: column;
@@ -6,33 +6,45 @@
 }
 
 /*HEADER PART*/
-.header{
+.header {
     display: flex;
     flex-direction: column;
 }
 
 
-.header .header-title{
+.header .header-title {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
 }
 
-.header .header-button-container{
+.header .header-button-container {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
 }
 
-.header-button-container .stock-button{
+.header-button-container .stock-button {
     margin-left: 15px;
 }
 
 
 /*BODY PART*/
 
-.body-container{
+.body-container {
     display: flex;
+}
+
+.body-container .output-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2rem;
+    border: solid 1px #F9F8F7;
+    flex-grow: 2
+}
+
+.body-container .output-container .output-container-header{
+    margin: 0 auto;
 }
 
 

@@ -11,17 +11,16 @@ class PriceThread(private val sessionService: SocketSessionService<Message>, pri
         while (!sessionService.isSessionListEmpty(StockSessionType.PRICE)) {
             try {
                 sleep(100)
-                val stock = stockService.getNextPrice()
+                    val stock = stockService.getNextPrice()
                 sessionService.broadCastSession(
                     Message(
-                        "thread Runnable ${currentThread()}",
-                        stock as Any,
-
-                        ),
+                        "${currentThread()}",
+                        stock as Any
+                    ),
                     StockSessionType.PRICE
                 )
             } catch (ex: Exception) {
-                println(" PriceThread error: ${ex.localizedMessage}")
+                println("PriceThread error: ${ex.localizedMessage}")
             }
         }
         println("Price Thread ${currentThread()} stopped.")

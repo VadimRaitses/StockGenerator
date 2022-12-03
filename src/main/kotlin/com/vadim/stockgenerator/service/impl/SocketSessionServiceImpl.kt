@@ -7,6 +7,7 @@ import com.vadim.stockgenerator.model.StockSessionType
 import com.vadim.stockgenerator.model.StockSocketSession
 import com.vadim.stockgenerator.service.SocketSessionService
 import org.springframework.stereotype.Service
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.socket.CloseStatus
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketSession
@@ -15,7 +16,8 @@ import java.util.concurrent.ConcurrentHashMap
 @Service
 class SocketSessionServiceImpl<T> : SocketSessionService<T> {
 
-    private val sessionMap = ConcurrentHashMap<String, StockSocketSession>()
+    @Volatile
+    private var sessionMap = ConcurrentHashMap<String, StockSocketSession>()
 
 
     override fun getSession(sessionId: String): WebSocketSession {
@@ -43,7 +45,8 @@ class SocketSessionServiceImpl<T> : SocketSessionService<T> {
         sessionMap -= session.id
     }
 
-    override fun closeSession(session: WebSocketSession, status: CloseStatus) {
+    override  fun  closeSession(session: WebSocketSession, status: CloseStatus) {
+        println("closing session: ${session.id}")
         sessionMap.computeIfPresent(session.id) { _, value -> value.also { value.status = StockSessionStatus.CLOSED } }
         deleteSession(session)
     }

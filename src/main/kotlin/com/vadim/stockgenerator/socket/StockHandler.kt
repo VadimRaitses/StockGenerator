@@ -19,17 +19,18 @@ class StockHandler(
     private val sessionService: SocketSessionService<Message>
 ) : TextWebSocketHandler() {
 
-    private lateinit var stock: StockThread
+    private lateinit var stockThread: StockThread
+
 
     @Throws(Exception::class)
     override fun afterConnectionEstablished(session: WebSocketSession) {
-        println("welcome $session,${sessionService.getSessions()} : ${Thread.currentThread()}")
+        println("welcome to Stock Handler $session,${sessionService.getSessions()} : ${Thread.currentThread()}")
         if (sessionService.isSessionListEmpty(StockSessionType.STOCK)) {
             sessionService.addSession(session, StockSessionType.STOCK)
-            stock = StockThread(sessionService, stockService)
-            stock.start();
+            stockThread = StockThread(sessionService, stockService)
+            stockThread.start();
         }
-        println("thread object memory  $stock, ${Thread.currentThread()}")
+        println("thread object memory  $stockThread, ${Thread.currentThread()}")
         sessionService.addSession(session, StockSessionType.STOCK)
     }
 

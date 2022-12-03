@@ -10,18 +10,19 @@ class StockThread(private val sessionService: SocketSessionService<Message>, pri
 
         while (!sessionService.isSessionListEmpty(StockSessionType.STOCK)) {
             try {
-                val stock = stockService.getNextStockEvent()
                 sleep(400)
+                if (Thread.interrupted()) {
+                    println("interrupted")
+                }
+                val stock = stockService.getNextStockEvent()
                 sessionService.broadCastSession(
                     Message(
                         "thread Runnable ${currentThread()}",
-                        stock as Any,
-                    ),
+                        stock as Any),
                     StockSessionType.STOCK
                 )
             } catch (ex: Exception) {
                 println("StockThread error: ${ex.localizedMessage}")
-                println("error: ${ex.localizedMessage}")
             }
         }
         println("Stock Thread${currentThread()} stopped.")

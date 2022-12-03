@@ -22,15 +22,26 @@
         <div class="header-button-container">
             <button id="connect" value="Connect" onclick="go();" class="btn btn-secondary stock-button">Connect</button>
             <button id="disconnect" value="Disconnect" onclick="stop();" class="btn btn-secondary stock-button">Disconnect</button>
+
+            <div class="dropdown stock-button">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><button class="dropdown-item"  onclick="springReactive();">Java-RX</button></li>
+                    <li><button class="dropdown-item" onclick="thread();">Thread</button></li>
+                </ul>
+            </div>
+
         </div>
 
     </div>
     <div id="" class="body-container">
-        <div id="outputStocks" style="display: flex; flex-direction: column; margin-right: 2rem; border: solid 1px #F9F8F7">
-            <h4>Stocks</h4>
+        <div id="outputStocks" class="output-container">
+            <h4 class="output-container-header">Stocks</h4>
         </div>
-        <div id="outputStockEvents" style="display: flex; flex-direction: column; border: solid 1px #F9F8F7">
-            <h4>Events</h4>
+        <div id="outputStockEvents" class="output-container">
+            <h4 class="output-container-header">Events</h4>
         </div>
     </div>
 </div>
@@ -43,10 +54,10 @@
     let stocksWs
     let stockEventWs
 
+
     function go() {
         outputQuotesStocks = document.getElementById("outputStocks");
         outputStockEvent = document.getElementById("outputStockEvents");
-        // stocksWs = testWebSocket("ws://localhost:8080/rx-stock", outputQuotesStocks);
         stocksWs = testWebSocket("ws://localhost:8080/stock", outputQuotesStocks);
         stockEventWs = testWebSocket("ws://localhost:8080/stock-event", outputStockEvent);
     }
@@ -101,6 +112,15 @@
             output.removeChild(output.children[output.children.length - 1])
         }
     }
+
+    function springReactive(){
+        console.log("java-rx")
+    }
+
+    function thread(){
+        console.log("thread")
+    }
+
 
 
 </script>
