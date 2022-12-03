@@ -11,9 +11,6 @@ class StockThread(private val sessionService: SocketSessionService<Message>, pri
         while (!sessionService.isSessionListEmpty(StockSessionType.STOCK)) {
             try {
                 sleep(400)
-                if (Thread.interrupted()) {
-                    println("interrupted")
-                }
                 val stock = stockService.getNextStockEvent()
                 sessionService.broadCastSession(
                     Message(
