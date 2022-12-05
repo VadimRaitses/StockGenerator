@@ -24,7 +24,7 @@ class StockThread(
                 val stock = stockService.getNextStockEvent()
                 sessionService.broadCastSession(
                     Message(
-                        "thread Runnable ${currentThread()}",
+                        "${currentThread()}",
                         stock as Any
                     ),
                     StockSessionType.STOCK
@@ -33,7 +33,7 @@ class StockThread(
                 println("StockThread error: ${ex.localizedMessage}")
             }
         }
-        println("Stock Thread${currentThread()} stopped.")
+        println("Stock Thread:${currentThread()} had stopped.")
     }
 
 }

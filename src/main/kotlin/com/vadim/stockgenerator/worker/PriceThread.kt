@@ -32,7 +32,7 @@ class PriceThread(
                 println("PriceThread error: ${ex.localizedMessage}")
             }
         }
-        println("Price Thread ${currentThread()} stopped.")
+        println("Price Thread: ${currentThread()} had stopped.")
     }
 
 }
