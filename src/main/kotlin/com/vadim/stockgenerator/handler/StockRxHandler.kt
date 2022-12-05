@@ -1,4 +1,4 @@
-package com.vadim.stockgenerator.socket
+package com.vadim.stockgenerator.handler
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.vadim.stockgenerator.model.Message
