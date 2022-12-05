@@ -3,6 +3,8 @@ package com.vadim.stockgenerator.service.impl
 import com.vadim.stockgenerator.model.Message
 import com.vadim.stockgenerator.model.StockSessionType
 import com.vadim.stockgenerator.service.*
+import com.vadim.stockgenerator.worker.PriceThread
+import com.vadim.stockgenerator.worker.StockThread
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.Subject
 import lombok.RequiredArgsConstructor

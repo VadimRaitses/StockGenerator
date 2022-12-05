@@ -1,13 +1,7 @@
 package com.vadim.stockgenerator.handler
 
-import com.vadim.stockgenerator.model.Message
 import com.vadim.stockgenerator.model.StockSessionType
-import com.vadim.stockgenerator.service.SocketSessionService
 import com.vadim.stockgenerator.service.StockHandlerService
-import com.vadim.stockgenerator.service.StockService
-import com.vadim.stockgenerator.service.StockThread
-import io.reactivex.rxjava3.subjects.BehaviorSubject
-import io.reactivex.rxjava3.subjects.Subject
 import lombok.AllArgsConstructor
 import org.springframework.stereotype.Component
 import org.springframework.web.socket.CloseStatus
