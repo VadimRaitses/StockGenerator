@@ -10,6 +10,10 @@ publishing available stocks prices to subscribed client over websocket.
 ```
 
 client available on **http://localhost:8080**  
+swagger http://localhost:8080/swagger-ui.html#/ \
+http://localhost:8080/v2/api-docs  \
+
+
 socket with java rx publishing available on **http://localhost:8080/rx-stock**
 socket with thread publishing available on **http://localhost:8080/stock**
 socket with thread publishing available on **http://localhost:8080/stock-event**
@@ -17,6 +21,5 @@ socket with thread publishing available on **http://localhost:8080/stock-event**
 infinitive stock generated server with client,\
 **ws:/stock will** generate stocks events with event ADD or DELETE\
 **ws:/stock-event** will generate prices to stocks already created\
-**http:/sessions** will show list of connected sessions and their states
 
 
