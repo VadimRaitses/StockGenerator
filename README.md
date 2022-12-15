@@ -1,4 +1,4 @@
-### Stock Generator
+### Stock And Prices Generator
 
 JavaRx, MultiThread and Kotlin workaround over centralized\
 publishing available stocks prices to subscribed client over websocket.
